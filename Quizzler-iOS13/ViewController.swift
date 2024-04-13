@@ -33,9 +33,9 @@ class ViewController: UIViewController {
         let questionAnswer = questions[activeQuestion].answer
 
         if answer == questionAnswer {
-            print("right")
+            sender.backgroundColor = UIColor.green
         } else {
-            print("wrong")
+            sender.backgroundColor = UIColor.red
         }
 
         if activeQuestion < questions.count - 1 {
@@ -44,10 +44,17 @@ class ViewController: UIViewController {
             activeQuestion = 0
         }
 
+        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: updateUi)
+    }
+
+    func updateUi(timer: Timer) {
         updateUi()
     }
 
     func updateUi() {
         questionLabel.text = questions[activeQuestion].text
+
+        trueButton.backgroundColor = UIColor.clear
+        falseButton.backgroundColor = UIColor.clear
     }
 }

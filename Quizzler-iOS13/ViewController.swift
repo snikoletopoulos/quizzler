@@ -7,9 +7,9 @@ class ViewController: UIViewController {
     @IBOutlet var falseButton: UIButton!
 
     let questions = [
-        ["Four + Two is equal to Six.", "True"],
-        ["Five - Three is equal to One.", "True"],
-        ["Three + Eight is equal to Ten.", "False"],
+        Question("Four + Two is equal to Six.", answer: "True"),
+        Question("Five - Three is equal to One.", answer: "True"),
+        Question("Three + Eight is equal to Ten.", answer: "False"),
     ]
     var activeQuestion = 0
 
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         let answer = sender.currentTitle
-        let questionAnswer = questions[activeQuestion][1]
+        let questionAnswer = questions[activeQuestion].answer
 
         if answer == questionAnswer {
             print("right")
@@ -39,6 +39,6 @@ class ViewController: UIViewController {
     }
 
     func updateUi() {
-        questionLabel.text = questions[activeQuestion][0]
+        questionLabel.text = questions[activeQuestion].text
     }
 }

@@ -5,30 +5,28 @@ struct QuizBrain {
     var score = 0
 
     let questions = [
-        Question("A slug's blood is green.", answer: "True"),
-        Question("Approximately one quarter of human bones are in the feet.", answer: "True"),
-        Question("The total surface area of two human lungs is approximately 70 square metres.", answer: "True"),
-        Question("In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.", answer: "True"),
-        Question("In London, UK, if you happen to die in the House of Parliament, you are technically entitled to a state funeral, because the building is considered too sacred a place.", answer: "False"),
-        Question("It is illegal to pee in the Ocean in Portugal.", answer: "True"),
-        Question("You can lead a cow down stairs but not up stairs.", answer: "False"),
-        Question("Google was originally called 'Backrub'.", answer: "True"),
-        Question("Buzz Aldrin's mother's maiden name was 'Moon'.", answer: "True"),
-        Question("The loudest sound produced by any animal is 188 decibels. That animal is the African Elephant.", answer: "False"),
-        Question("No piece of square dry paper can be folded in half more than 7 times.", answer: "False"),
-        Question("Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", answer: "True"),
+        Question("Which is the largest organ in the human body?", answers: ["Heart", "Skin", "Large Intestine"], correctAnswer: "Skin"),
+        Question("Five dollars is worth how many nickels?", answers: ["25", "50", "100"], correctAnswer: "100"),
+        Question("What do the letters in the GMT time zone stand for?", answers: ["Global Meridian Time", "Greenwich Mean Time", "General Median Time"], correctAnswer: "Greenwich Mean Time"),
+        Question("What is the French word for 'hat'?", answers: ["Chapeau", "Écharpe", "Bonnet"], correctAnswer: "Chapeau"),
+        Question("In past times, what would a gentleman keep in his fob pocket?", answers: ["Notebook", "Handkerchief", "Watch"], correctAnswer: "Watch"),
+        Question("How would one say goodbye in Spanish?", answers: ["Au Revoir", "Adiós", "Salir"], correctAnswer: "Adiós"),
+        Question("Which of these colours is NOT featured in the logo for Google?", answers: ["Green", "Orange", "Blue"], correctAnswer: "Orange"),
+        Question("What alcoholic drink is made from molasses?", answers: ["Rum", "Whisky", "Gin"], correctAnswer: "Rum"),
+        Question("What type of animal was Harambe?", answers: ["Panda", "Gorilla", "Crocodile"], correctAnswer: "Gorilla"),
+        Question("Where is Tasmania located?", answers: ["Indonesia", "Australia", "Scotland"], correctAnswer: "Australia"),
     ]
 
     mutating func check(answer: String) -> Bool {
-        if answer == questions[activeQuestion].answer {
+        if answer == questions[activeQuestion].correctAnswer {
             score += 1
             return true
         }
         return false
     }
 
-    func getQuestionText() -> String {
-        return questions[activeQuestion].text
+    func getActiveQuestion() -> Question {
+        return questions[activeQuestion]
     }
 
     func getProgress() -> Float {

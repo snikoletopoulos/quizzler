@@ -2,6 +2,7 @@ import Foundation
 
 struct QuizBrain {
     var activeQuestion = 0
+    var score = 0
 
     let questions = [
         Question("A slug's blood is green.", answer: "True"),
@@ -18,8 +19,12 @@ struct QuizBrain {
         Question("Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", answer: "True"),
     ]
 
-    func check(answer: String) -> Bool {
-        return answer == questions[activeQuestion].answer
+    mutating func check(answer: String) -> Bool {
+        if answer == questions[activeQuestion].answer {
+            score += 1
+            return true
+        }
+        return false
     }
 
     func getQuestionText() -> String {
@@ -35,6 +40,7 @@ struct QuizBrain {
             activeQuestion += 1
         } else {
             activeQuestion = 0
+            score = 0
         }
     }
 }

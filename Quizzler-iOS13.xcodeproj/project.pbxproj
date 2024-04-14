@@ -72,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				AD7631B522F9851900C6E71B /* README.md */,
-				AD4BDE4822D878BA005BA4CC /* Quizzler-iOS13 */,
+				AD4BDE4822D878BA005BA4CC /* Quizzler */,
 				AD4BDE4722D878BA005BA4CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,7 +85,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AD4BDE4822D878BA005BA4CC /* Quizzler-iOS13 */ = {
+		AD4BDE4822D878BA005BA4CC /* Quizzler */ = {
 			isa = PBXGroup;
 			children = (
 				AD4BDE4922D878BA005BA4CC /* AppDelegate.swift */,
@@ -97,7 +97,7 @@
 				AD4BDE5422D878BC005BA4CC /* LaunchScreen.storyboard */,
 				AD4BDE5722D878BC005BA4CC /* Info.plist */,
 			);
-			path = "Quizzler-iOS13";
+			path = Quizzler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

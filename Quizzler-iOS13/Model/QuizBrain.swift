@@ -1,10 +1,7 @@
-import UIKit
+import Foundation
 
-class ViewController: UIViewController {
-    @IBOutlet var questionLabel: UILabel!
-    @IBOutlet var progressBar: UIProgressView!
-    @IBOutlet var trueButton: UIButton!
-    @IBOutlet var falseButton: UIButton!
+struct QuizBrain {
+    var activeQuestion = 0
 
     let questions = [
         Question("A slug's blood is green.", answer: "True"),
@@ -20,41 +17,24 @@ class ViewController: UIViewController {
         Question("No piece of square dry paper can be folded in half more than 7 times.", answer: "False"),
         Question("Chocolate affects a dog's heart and nervous system; a few ounces are enough to kill a small dog.", answer: "True"),
     ]
-    var activeQuestion = 0
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        updateUi()
+    func check(answer: String) -> Bool {
+        return answer == questions[activeQuestion].answer
     }
 
-    @IBAction func answerButtonPressed(_ sender: UIButton) {
-        let answer = sender.currentTitle
-        let questionAnswer = questions[activeQuestion].answer
+    func getQuestionText() -> String {
+        return questions[activeQuestion].text
+    }
 
-        if answer == questionAnswer {
-            sender.backgroundColor = UIColor.green
-        } else {
-            sender.backgroundColor = UIColor.red
-        }
+    func getProgress() -> Float {
+        return Float(activeQuestion) / Float(questions.count - 1)
+    }
 
+    mutating func nextQuestion() {
         if activeQuestion < questions.count - 1 {
             activeQuestion += 1
         } else {
             activeQuestion = 0
         }
-
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: updateUi)
-    }
-
-    func updateUi(timer: Timer) {
-        updateUi()
-    }
-
-    func updateUi() {
-        questionLabel.text = questions[activeQuestion].text
-
-        trueButton.backgroundColor = UIColor.clear
-        falseButton.backgroundColor = UIColor.clear
     }
 }

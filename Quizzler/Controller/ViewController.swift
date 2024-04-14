@@ -1,53 +1,53 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet var scoreLabel: UILabel!
-    @IBOutlet var questionLabel: UILabel!
-    @IBOutlet var progressBar: UIProgressView!
+  @IBOutlet var scoreLabel: UILabel!
+  @IBOutlet var questionLabel: UILabel!
+  @IBOutlet var progressBar: UIProgressView!
 
-    @IBOutlet var firstButton: UIButton!
-    @IBOutlet var secondButton: UIButton!
-    @IBOutlet var thirdButton: UIButton!
+  @IBOutlet var firstButton: UIButton!
+  @IBOutlet var secondButton: UIButton!
+  @IBOutlet var thirdButton: UIButton!
 
-    var quizBrain = QuizBrain()
+  var quizBrain = QuizBrain()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        updateUi()
+    updateUi()
+  }
+
+  @IBAction func answerButtonPressed(_ sender: UIButton) {
+    let userAnswer = sender.currentTitle!
+
+    if quizBrain.check(answer: userAnswer) {
+      sender.backgroundColor = UIColor.green
+    } else {
+      sender.backgroundColor = UIColor.red
     }
 
-    @IBAction func answerButtonPressed(_ sender: UIButton) {
-        let userAnswer = sender.currentTitle!
+    quizBrain.nextQuestion()
 
-        if quizBrain.check(answer: userAnswer) {
-            sender.backgroundColor = UIColor.green
-        } else {
-            sender.backgroundColor = UIColor.red
-        }
+    Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: updateUi)
+  }
 
-        quizBrain.nextQuestion()
+  func updateUi(timer: Timer) {
+    updateUi()
+  }
 
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false, block: updateUi)
-    }
+  func updateUi() {
+    let activeQuestion = quizBrain.getActiveQuestion()
 
-    func updateUi(timer: Timer) {
-        updateUi()
-    }
+    questionLabel.text = activeQuestion.text
+    firstButton.setTitle(activeQuestion.answers[0], for: .normal)
+    secondButton.setTitle(activeQuestion.answers[1], for: .normal)
+    thirdButton.setTitle(activeQuestion.answers[2], for: .normal)
 
-    func updateUi() {
-        let activeQuestion = quizBrain.getActiveQuestion()
+    progressBar.progress = quizBrain.getProgress()
+    scoreLabel.text = "Score: \(quizBrain.score)"
 
-        questionLabel.text = activeQuestion.text
-        firstButton.setTitle(activeQuestion.answers[0], for: .normal)
-        secondButton.setTitle(activeQuestion.answers[1], for: .normal)
-        thirdButton.setTitle(activeQuestion.answers[2], for: .normal)
-
-        progressBar.progress = quizBrain.getProgress()
-        scoreLabel.text = "Score: \(quizBrain.score)"
-
-        firstButton.backgroundColor = UIColor.clear
-        secondButton.backgroundColor = UIColor.clear
-        thirdButton.backgroundColor = UIColor.clear
-    }
+    firstButton.backgroundColor = UIColor.clear
+    secondButton.backgroundColor = UIColor.clear
+    thirdButton.backgroundColor = UIColor.clear
+  }
 }
